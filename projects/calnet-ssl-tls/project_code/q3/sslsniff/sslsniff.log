@@ -1,0 +1,57 @@
+1478993651 INFO sslsniff : Certificate Ready: data.gov-of-caltopia.info/.neocal.info
+1478993660 DEBUG sslsniff : New intercept, source 10.161.161.131:54292 <-> destination 35.162.122.239:443
+1478993660 DEBUG sslsniff : Read from Client (data.gov-of-caltopia.info) :
+POST /update HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 71
+
+user=cs161-aad,cs161-aij&secret=316e5722bf590b6f&emergency_kill=false
+
+1478993660 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+HTTP/1.0 200 OK
+Date: Sat, 12 Nov 2016 23:34:21 GMT
+Content-Length: 81
+Content-Type: text/html
+Server: TwistedWeb/16.5.0
+
+
+1478993660 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+<html>Kill command received. Emergency kill initiated! Disabling system...</html>
+1478993735 INFO sslsniff : Certificate Ready: data.gov-of-caltopia.info/.neocal.info
+1478993751 DEBUG sslsniff : New intercept, source 10.161.161.131:54300 <-> destination 35.162.122.239:443
+1478993751 DEBUG sslsniff : Read from Client (data.gov-of-caltopia.info) :
+POST /update HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 71
+
+user=cs161-aad,cs161-aij&secret=316e5722bf590b6f&emergency_kill=false
+
+1478993751 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+HTTP/1.0 200 OK
+Date: Sat, 12 Nov 2016 23:35:51 GMT
+Content-Length: 81
+Content-Type: text/html
+Server: TwistedWeb/16.5.0
+
+
+1478993751 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+<html>Kill command received. Emergency kill initiated! Disabling system...</html>
+1478993795 INFO sslsniff : Certificate Ready: data.gov-of-caltopia.info
+1478993812 DEBUG sslsniff : New intercept, source 10.161.161.131:54306 <-> destination 35.162.122.239:443
+1478993812 DEBUG sslsniff : Read from Client (data.gov-of-caltopia.info) :
+POST /update HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 71
+
+user=cs161-aad,cs161-aij&secret=316e5722bf590b6f&emergency_kill=false
+
+1478993812 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+HTTP/1.0 200 OK
+Date: Sat, 12 Nov 2016 23:36:52 GMT
+Content-Length: 81
+Content-Type: text/html
+Server: TwistedWeb/16.5.0
+
+
+1478993812 DEBUG sslsniff : Read from Server (data.gov-of-caltopia.info) :
+<html>Kill command received. Emergency kill initiated! Disabling system...</html>

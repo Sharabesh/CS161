@@ -1,0 +1,13 @@
+First, I looked up what my IP address was using `ifconfig`. From this, I learned my own IP address for eth1 was 10.161.161.161.
+Putting this address with the subnet mask of 24, I used the CIDR address 10.161.161.161/24 with nmap, and I found another host on the network:
+10.161.161.111 with an open FTP service at port 21 (using TCP).
+
+Then I ran `ftp 10.161.161.111` to connect to the FTP service.
+
+The FTP server is running VSFTPD 2.3.4, which has a known security vulnerability (which I discovered upon Googling the daemon itself). The vulnerability is quite obvious in the code for VSFTPD itself:
+If the username begins with (excluding the first character) `:)`, then the daemon will execute an "extra" function that sets up the server to listen on port 6200 with shell privileges.
+
+Thus, I simply supplied a username like `x:)`, and then some garbage for the password. At this point, from another terminal, I used `ncat 10.161.161.111 6200` to connect and access the shell.
+
+At this point, I had root access to view `secret.txt`.
+

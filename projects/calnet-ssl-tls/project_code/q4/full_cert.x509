@@ -1,0 +1,74 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 3 (0x3)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=DigiPwntar, ST=Amsterdam, C=NL/emailAddress=None, O=DigiPwntar Certification Authority
+        Validity
+            Not Before: Nov  8 03:51:29 2016 GMT
+            Not After : Nov  8 03:51:29 2017 GMT
+        Subject: CN=email.gov-of-caltopia.info, ST=CA, C=US/emailAddress=admin@gov-of-caltopia.info, O=Government_Of_Caltopia, OU=None
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:be:63:ad:5d:6d:bf:c1:59:59:c4:26:58:b3:91:
+                    41:b0:1a:e0:b2:11:a9:9d:38:fc:2d:b8:b4:63:49:
+                    ac:db:66:b2:57:75:15:bd:7d:03:86:7b:ae:37:44:
+                    9f:bd:2a:9b:e7:c7:4b:7f:e6:bd:e5:e5:7d:02:e5:
+                    84:c7:a7:21:d7:b6:73:5f:26:c7:a9:82:a5:a0:0b:
+                    82:55:08:29:5a:a9:a0:ec:53:86:b8:d4:7b:0a:50:
+                    22:5e:b6:5e:fc:63:a2:48:e6:88:d8:82:2e:fd:61:
+                    8b:da:62:3c:1e:58:5f:f6:c8:ae:66:3c:3c:b3:2c:
+                    f4:e0:5f:fd:ff:c3:b0:e9:42:bb:7c:7f:97:f7:a6:
+                    7f:69:de:23:c2:f4:4a:29:55:81:27:1e:6e:a8:0d:
+                    f9:b9:1d:99:96:81:99:f7:85:c3:d9:72:84:73:17:
+                    00:8f:2e:f8:d9:0e:a7:83:34:3b:72:ed:51:e1:43:
+                    85:14:4e:e2:be:4b:2f:f6:23:06:d2:96:76:06:eb:
+                    0e:db:7f:54:06:3d:50:f0:2a:f7:bb:8d:65:85:7e:
+                    6f:06:31:12:04:da:13:f5:e6:ea:b6:f2:fe:3e:3c:
+                    39:9f:cf:54:39:fa:d8:96:cf:63:e9:99:d3:d6:7d:
+                    7b:be:59:d8:81:79:3f:bc:61:96:8b:33:2e:3c:d3:
+                    34:c7
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+    Signature Algorithm: sha256WithRSAEncryption
+         05:1b:fb:6b:f6:21:3c:ee:30:5e:17:b2:56:d7:fc:99:52:c0:
+         f6:07:f4:dc:71:72:d1:7e:15:5f:84:b9:6e:e3:1c:f7:ea:05:
+         5f:79:12:a2:56:b1:28:de:94:8e:6d:39:10:d6:23:5f:ee:cd:
+         03:0b:a4:87:75:75:88:75:92:17:a5:7f:69:1f:9a:04:51:1c:
+         51:11:80:2c:a4:59:e1:81:d7:20:a3:67:90:6f:9e:5b:b2:34:
+         3a:cb:bc:2c:d3:30:a1:f6:3c:de:68:bd:9b:1f:8d:4a:44:da:
+         de:fb:a4:c7:d9:27:e9:3b:10:f8:24:f0:4f:8e:a3:a3:c6:55:
+         f5:76:71:25:6f:97:ee:2e:14:69:e8:f3:68:d6:2a:bc:5b:0d:
+         01:be:4d:36:42:49:b6:66:de:be:a7:7d:90:ee:88:25:06:db:
+         9b:97:b0:18:5d:e9:0b:a7:ec:21:b0:9e:7b:be:df:d8:8a:a0:
+         d8:c5:ad:c7:0c:fa:9d:19:ed:66:4b:e4:49:14:81:2e:bf:9b:
+         f5:b4:f2:aa:50:7e:38:07:e6:ea:5c:3d:db:00:d9:19:75:9f:
+         15:62:53:db:59:6f:5d:53:2e:c8:2c:1e:16:29:d5:76:21:4c:
+         c4:e9:e7:4e:e6:f0:26:90:c7:da:00:f3:3a:f9:e3:2d:d3:a7:
+         aa:9e:69:f4
+-----BEGIN CERTIFICATE-----
+MIIDmzCCAoOgAwIBAgIBAzANBgkqhkiG9w0BAQsFADB4MRMwEQYDVQQDDApEaWdp
+UHdudGFyMRIwEAYDVQQIDAlBbXN0ZXJkYW0xCzAJBgNVBAYTAk5MMRMwEQYJKoZI
+hvcNAQkBFgROb25lMSswKQYDVQQKDCJEaWdpUHdudGFyIENlcnRpZmljYXRpb24g
+QXV0aG9yaXR5MB4XDTE2MTEwODAzNTEyOVoXDTE3MTEwODAzNTEyOVowgZoxIzAh
+BgNVBAMMGmVtYWlsLmdvdi1vZi1jYWx0b3BpYS5pbmZvMQswCQYDVQQIDAJDQTEL
+MAkGA1UEBhMCVVMxKTAnBgkqhkiG9w0BCQEWGmFkbWluQGdvdi1vZi1jYWx0b3Bp
+YS5pbmZvMR8wHQYDVQQKDBZHb3Zlcm5tZW50X09mX0NhbHRvcGlhMQ0wCwYDVQQL
+DAROb25lMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvmOtXW2/wVlZ
+xCZYs5FBsBrgshGpnTj8Lbi0Y0ms22ayV3UVvX0DhnuuN0SfvSqb58dLf+a95eV9
+AuWEx6ch17ZzXybHqYKloAuCVQgpWqmg7FOGuNR7ClAiXrZe/GOiSOaI2IIu/WGL
+2mI8Hlhf9siuZjw8syz04F/9/8Ow6UK7fH+X96Z/ad4jwvRKKVWBJx5uqA35uR2Z
+loGZ94XD2XKEcxcAjy742Q6ngzQ7cu1R4UOFFE7ivksv9iMG0pZ2BusO239UBj1Q
+8Cr3u41lhX5vBjESBNoT9ebqtvL+Pjw5n89UOfrYls9j6ZnT1n17vlnYgXk/vGGW
+izMuPNM0xwIDAQABow0wCzAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQAF
+G/tr9iE87jBeF7JW1/yZUsD2B/TccXLRfhVfhLlu4xz36gVfeRKiVrEo3pSObTkQ
+1iNf7s0DC6SHdXWIdZIXpX9pH5oEURxREYAspFnhgdcgo2eQb55bsjQ6y7ws0zCh
+9jzeaL2bH41KRNre+6TH2SfpOxD4JPBPjqOjxlX1dnElb5fuLhRp6PNo1iq8Ww0B
+vk02Qkm2Zt6+p32Q7oglBtubl7AYXekLp+whsJ57vt/YiqDYxa3HDPqdGe1mS+RJ
+FIEuv5v1tPKqUH44B+bqXD3bANkZdZ8VYlPbWW9dUy7ILB4WKdV2IUzE6edO5vAm
+kMfaAPM6+eMt06eqnmn0
+-----END CERTIFICATE-----

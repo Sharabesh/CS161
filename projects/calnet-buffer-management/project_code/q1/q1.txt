@@ -1,0 +1,23 @@
+In this problem, we see that there is a memory-safety vulnerability caused by the gets() function (line 7 of the code). Essentially, gets() reads from stdin and stores the values into a string (in this case, door). However, since the function only stops when it reaches a newline or end-of-file character, we can insert extra code (including our shellcode) into the buffer, and can thus overwrite our RIP to point to the shellcode.
+
+In determining our exploit, we began by stepping through our C file and checking the addresses of the ESP, EBP, and door before gets() is called (breakpoint at line 7).
+
+(gdb) p $esp
+$3 = (void *) 0xbffffc40
+(gdb) p $ebp
+$4 = (void *) 0xbffffc68
+(gdb) p &door
+$5 = (char (*)[8]) 0xbffffc58
+
+Since gets() will start to fill characters into the buffer from an address before the EBP, we know that this value can be overwritten. In addition, since we know that the RIP is located 4 bytes after the EBP, we can also write over the RIP and forge it to point to where our shell code begins, so that our shell code runs when the return command is called (after gets()).
+
+Thus, we inserted 20 bytes of random text (thus overwriting the EBP, but not the RIP), the address of our shell code (this is our forged RIP, which now points to 4 bytes after the RIP) and then the rest of our shell code. Once our buffer is filled, the deja_vu() function tries to execute the commands pointed to by the RIP, and thus a shell is spawned. Upon completion, it looks as such:
+
+vsftpd@pwnable:~$ invoke ./exploit
+whoami
+smith
+cat README
+Welcome to the real world.
+
+user: smith
+pass: f6g(Bz{w

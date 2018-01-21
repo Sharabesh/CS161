@@ -1,0 +1,17 @@
+Procedure
+---------
+I opened Wireshark and edited the SSL settings, as dictated by the specifications. I then imported the capture, and began looking through the communication. I noticed the HTTP GET request and response. Upon examining the response, I found the secret.
+
+Cryptographic Algorithms
+------------------------
+The cipher suite selected by the server is:
+TLS_RSA_WITH_AES_256_GCM_SHA384
+RSA: Key-exchange to distribute a pre-master secret (in this case, encrypted using server's public key from certificate)
+AES_256_GCM: AES in Galois Counter Mode to encrypt actual messages to ensure confidentiality of actual messages
+SHA384: Hash function used to create hashes of each message, and used for MAC's to ensure integrity of actual messages (and the handshake) 
+
+Some other cryptographic algorithms like checksums are also present, but not as important as the key-exchange, message encryption, and message integrity cryptography.
+
+Preventing Eavesdropping
+------------------------
+As an eavesdropper, I know the nonces. Since the server uses RSA, my having the private key allows me to decrypt the pre-master secret. Thus, I have everything I need (or rather, Wireshark has everything it needs) to derive the symmetric cipher keys used in protecting the actual messages. Thus, I can see everything. In order for the server to prevent such an attack, it would need to select a cipher suite that uses a key-exchange algorithm that has perfect forward secrecy, like Diffie-Hellman. If the server had used Diffie-Hellman, then even though I have the private key, I cannot discover the pre-master secret because the discrete logarithm problem is hard. The client in the captured communication would need to have supported Diffie-Hellman key-exchange in its cipher suite. If the server used DHE, then I would not be able to decipher the plaintext messages and uncover the secret.

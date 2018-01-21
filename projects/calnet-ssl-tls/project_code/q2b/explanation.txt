@@ -1,0 +1,11 @@
+Procedure
+---------
+When generating a seed, the original generate_rsa_pair.c has a bug. Instead of adding the number of milliseconds to the number of seconds since the epoch, the seed is set to be just the number of microseconds this second, without the lower 7 bits (essentially dividing the microseconds by about 100). The number of microseconds is anywhere from 0 to 1 million, and after shifting right by 7 bits, we see that there are only 7812 values that the seed could be.
+
+Thus, I simply brute-forced all 7812 seeds, and look for the resulting RSA key-pair that creates the public key that is the same as the one I have. Then I also have the corresponding private key.
+
+I added this key to Wireshark, and started listening on eth1. Every so often, the same conversation repeats, and I saw the secret code, decrypted using this private key.
+
+Location of bug
+---------------
+Line 148 is where the bug is. In order to match the comment, it should be `seed += time_micro_sec >> 10`. This actually adds the number of milliseconds (approximately) to the seed, instead of just setting it to some small number. However, using a timestamp as a seed still isn't secure, since this is information an attacker can guess, as it actually has very little entropy in real life. Within a few seconds, the seeds can still be brute-forced; there would be more than 7812 values, but it's still easily done by any laptop on today's market.

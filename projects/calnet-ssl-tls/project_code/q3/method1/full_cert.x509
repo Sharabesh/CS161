@@ -1,0 +1,72 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 15 (0xf)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=budget-certs-r-us.biz, ST=California, C=US/emailAddress=budget-certs-r-us.biz, O=Budget Certs R Us Certification Authority
+        Validity
+            Not Before: Nov  7 20:01:21 2016 GMT
+            Not After : Nov  7 20:01:21 2017 GMT
+        Subject: CN=data.gov-of-caltopia.info/.neocal.info
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:c1:da:4a:80:dd:64:6b:cd:c1:46:73:80:d5:a0:
+                    48:10:95:28:e5:91:74:30:f2:d6:d5:fe:5c:83:ef:
+                    ed:85:59:26:07:f3:5e:db:cb:64:dd:58:77:32:d8:
+                    91:2c:ad:ab:cc:3b:11:d2:83:d2:0f:dc:bb:7b:12:
+                    b3:f6:1f:2b:a6:c8:c8:23:b8:5a:c0:63:7d:83:d0:
+                    50:a6:c2:c0:1c:2f:f8:7e:3c:10:8f:6e:ba:09:cb:
+                    0e:7e:70:56:9d:86:23:f7:90:d9:47:2c:e4:ca:6d:
+                    37:b9:f7:73:82:b5:1a:70:39:d6:54:c0:34:23:23:
+                    8e:8f:94:96:b0:e6:65:95:18:a7:96:6a:14:ec:3a:
+                    45:1e:c5:a8:17:95:95:b6:23:55:bf:2d:d4:49:77:
+                    a5:cf:a9:11:52:27:65:8f:68:33:75:b0:8f:34:49:
+                    db:f3:67:c7:c2:80:84:bf:fd:7b:c0:2b:fb:d1:88:
+                    08:66:fb:c9:29:03:c6:10:0d:69:4d:40:7d:5c:b6:
+                    4f:22:9e:69:b2:27:2a:2c:bd:1b:4e:d1:02:8d:15:
+                    5a:6f:dd:59:46:5d:fb:27:14:29:bd:1a:83:5c:29:
+                    70:18:e0:45:fb:1b:75:55:3f:64:46:53:6b:1d:41:
+                    b2:aa:1f:40:b8:5b:6f:80:00:c4:e7:e5:cd:49:61:
+                    4f:f7
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+    Signature Algorithm: sha256WithRSAEncryption
+         aa:b7:76:20:34:61:02:ea:f8:79:ac:42:86:cf:10:00:dd:b7:
+         a2:00:70:77:a5:97:aa:12:02:5d:58:51:ab:8c:72:52:f4:62:
+         9d:6a:12:f6:b9:ca:7e:36:5f:fb:cb:ee:80:c9:cc:81:68:89:
+         47:0d:d4:93:e6:29:d5:c8:e2:6e:14:27:2f:4b:50:c0:9f:b7:
+         30:be:0e:1a:9f:68:ca:da:97:ba:67:df:23:8a:21:12:dc:2f:
+         47:8f:6c:c1:09:70:fe:b1:ed:f9:02:a2:74:ca:8a:6c:bc:7d:
+         24:65:88:40:74:90:f7:cd:d4:e5:11:34:86:cb:6b:62:be:bd:
+         e8:c2:2f:cc:34:cc:9c:9d:d2:5a:22:ab:d4:ea:68:61:61:60:
+         19:a1:e3:31:70:d7:06:1b:0b:3c:2b:69:79:a1:f9:f2:24:a5:
+         a3:b0:c1:3e:14:c4:eb:1d:4e:fa:62:4e:7d:26:dd:92:b6:20:
+         d8:65:56:9b:72:01:15:65:6c:30:f0:c8:82:19:be:84:ab:61:
+         b7:70:ba:dc:02:10:01:09:45:59:22:67:22:96:25:23:90:1a:
+         2e:df:53:51:24:a7:9b:f6:83:f4:f5:ae:de:2a:c2:d1:6f:78:
+         8a:95:a7:2d:a4:62:1a:ca:34:55:36:cc:1a:36:58:42:d8:51:
+         c4:d8:6b:b2
+-----BEGIN CERTIFICATE-----
+MIIDVjCCAj6gAwIBAgIBDzANBgkqhkiG9w0BAQsFADCBnDEeMBwGA1UEAwwVYnVk
+Z2V0LWNlcnRzLXItdXMuYml6MRMwEQYDVQQIDApDYWxpZm9ybmlhMQswCQYDVQQG
+EwJVUzEkMCIGCSqGSIb3DQEJARYVYnVkZ2V0LWNlcnRzLXItdXMuYml6MTIwMAYD
+VQQKDClCdWRnZXQgQ2VydHMgUiBVcyBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTAe
+Fw0xNjExMDcyMDAxMjFaFw0xNzExMDcyMDAxMjFaMDExLzAtBgNVBAMMJmRhdGEu
+Z292LW9mLWNhbHRvcGlhLmluZm8vLm5lb2NhbC5pbmZvMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAwdpKgN1ka83BRnOA1aBIEJUo5ZF0MPLW1f5cg+/t
+hVkmB/Ne28tk3Vh3MtiRLK2rzDsR0oPSD9y7exKz9h8rpsjII7hawGN9g9BQpsLA
+HC/4fjwQj266CcsOfnBWnYYj95DZRyzkym03ufdzgrUacDnWVMA0IyOOj5SWsOZl
+lRinlmoU7DpFHsWoF5WVtiNVvy3USXelz6kRUidlj2gzdbCPNEnb82fHwoCEv/17
+wCv70YgIZvvJKQPGEA1pTUB9XLZPIp5psicqLL0bTtECjRVab91ZRl37JxQpvRqD
+XClwGOBF+xt1VT9kRlNrHUGyqh9AuFtvgADE5+XNSWFP9wIDAQABow0wCzAJBgNV
+HRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCqt3YgNGEC6vh5rEKGzxAA3beiAHB3
+pZeqEgJdWFGrjHJS9GKdahL2ucp+Nl/7y+6AycyBaIlHDdST5inVyOJuFCcvS1DA
+n7cwvg4an2jK2pe6Z98jiiES3C9Hj2zBCXD+se35AqJ0yopsvH0kZYhAdJD3zdTl
+ETSGy2tivr3owi/MNMycndJaIqvU6mhhYWAZoeMxcNcGGws8K2l5ofnyJKWjsME+
+FMTrHU76Yk59Jt2StiDYZVabcgEVZWww8MiCGb6Eq2G3cLrcAhABCUVZImciliUj
+kBou31NRJKeb9oP09a7eKsLRb3iKlactpGIayjRVNswaNlhC2FHE2Guy
+-----END CERTIFICATE-----

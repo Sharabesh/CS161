@@ -1,0 +1,19 @@
+Procedure
+---------
+The essential attack here is that the client checks the certificate name, but parses it poorly. Specifically, there are two attacks here. Firstly, if we include a slash `/` in the middle of the certificate name, the client will only consider the name up to the slash. Secondly, if we include a null-character in the middle of the certificate name, the client will actually see all of the name, but will call `strcmp`, which only compares up the the null-character.
+
+Thus, I made new certificate requests, for the names "data.gov-of-caltopia.info/.neocal.info" and "data.gov-of-caltopia.info[\0].neocal.info". For each attack, I fed the certificate and private key I generated into sslsniff, and then modified the http request to simply set emergency_kill to be true instead of false (of course, also fixing the content length in the header). The client believes I am the server, and sends its data to me so I can decrypt it, and then I can change it and re-encrypt it for the real server. The real server obeys the request and kills the switch.
+
+(These two attacks were determined to be sufficiently different on Piazza: @833)
+
+gov-of-caltopia.info Protection
+-------------------------------
+The server cannot do too much by itself. These attacks depend on the insecurity of the certificate authority, which is a separate entity. If the server uses another (secure) certificate authority, it needs the client (the Governor) to know to only accept certificates from that secure authority, and not Budget-Certs. This entails the client's using some form of certificate pinning or certificate monitoring, in addition to the server's commitment to only using the (few) secure certificate authorities it trusts.
+
+Governor Protection
+-------------------
+First and foremost, the Governor should fix the bugs in the code to check the certificate name. It should not trust delimiters and null characters, and should perform further look-aheads to parse the string correctly. However, this only addresses these specific attacks here, and Budget-Certs. For further protection, the server should only trust a few secure certificate authorities, and the Governor should implement certificate pinning or monitoring to ensure that all certificates he gets from the server are valid, in order to prevent MITM attacks like here.
+
+Certificate Authority Protection
+--------------------------------
+The certificate authority should properly blacklist certain characters in the requested certificate name (or even better, whitelist only the characters that are allowed), such as the slash and the null character. It should also perform better checks to actually ensure that the requester is who they say they are, and not let just anyone sign a certificate, even if it is for a single domain ending only. This would make the certificate authority more trustworthy, and the server and client have less of a need to implement certificate pinning or the like (although they still should, for defense in depth).

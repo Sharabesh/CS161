@@ -1,0 +1,13 @@
+Procedure
+---------
+First, I used Wireshark to listen in on the TLS handshake with the email server, and I found the details of the server's certificate (e.g. location, etc.). Then, I simply created a new certificate request using openssl, and used the DigiPwntar signing script to sign the certificate, certifying that I am email.gov-of-caltopia.info. Thus, if the Governor connects to my server and I present it with this certificate, it will be trusted.
+
+Thus, I supplied the signed certificate, along with the private key, to the local_webserver script, and started running that in the background.
+
+I then modified the pcap_tool script to listen for any DNS requests that are querying for email.gov-of-caltopia.info. When the script hears one, it constructs a spoofed DNS reply, pretending to be the DNS server. The source port and transaction ID are copied over to avoid suspicion. All other fields are also set to the appropriate values (e.g. number of responses, number of questions, etc.). The spoofed answer sets my own IP address as the IP address of the email server. This is packaged into the appropriate UDP header, and then IP header, and then sent out again. This is also run in the background.
+
+When the Governor's browser issues a DNS request for email.gov-of-caltopia.info, it will receive my spoofed DNS reply packet, and it will believe that my IP address is the email server. Upon visiting my local webserver, the browser is also presented with a certificate signed by DigiPwntar, which it trusts. Thus, I was able to get the username (Da_Rlz_Governator) and password (97786c04ab47c785).
+
+Avoiding the attack
+-------------------
+There is nothing the Governor can do to prevent this attack, because his browser trusts DigiPwntar, and I can have DigiPwntar sign anything I want. Thus, I can impersonate anyone I want. Combining this with the power to spoof DNS requests, there is no way the Governor can truly verify that anyone is legitimate. For TLS today, this means that we place an enormous amount of trust on certificate authorities to not sign things improperly. There are mechanisms in place to avoid this, but ultimately, if your browser trusts a CA, then that CA can wreak havoc if it wishes to. Additionally, I am an on-path attacker, and this gives me an enormous amount of power to spoof DNS replies. There is not much the Governor can do to avoid this, besides actions like combing his office to find and remove the webcam.

